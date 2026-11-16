@@ -16,6 +16,11 @@ Một trang HTML tĩnh duy nhất (`index.html`), không cần build. Ảnh linh
    - 4 bản ghi `A` cho `@`: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
    - 1 bản ghi `CNAME` cho `www` → `mhtiny3ds-a11y.github.io`
 
+## Hướng dẫn đưa App ra màn hình điện thoại
+
+Nút **📲 Đưa App ra màn hình điện thoại** mở bảng hướng dẫn 2 tab Android / iPhone–iPad (tự chọn tab theo máy).
+Có thể gửi thẳng link mở sẵn bảng hướng dẫn: `https://bamedonghanh.com/#cai-dat`.
+
 ## Sửa nội dung
 
 - Đổi link app: sửa thuộc tính `href` của 3 thẻ `<a class="app ...">` trong `index.html`.
