@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bamedonghanh</title>
+<meta name="description" content="Bamedonghanh – 3 web app học tập miễn phí cho con: Lumi English, Học Toán Vui, Toán Vui cùng Pi. Ba mẹ đồng hành, con lớn lên mỗi ngày.">
+<link rel="canonical" href="https://bamedonghanh.com/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bamedonghanh.com/">
+<meta property="og:title" content="Bamedonghanh – Ba mẹ đồng hành cùng con">
+<meta property="og:description" content="3 web app học Tiếng Anh và Toán miễn phí 100%, không quảng cáo, dành cho học sinh tiểu học.">
+<meta name="theme-color" content="#FFF5E4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1C1724" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFF5E4; --bg2:#FFE7C2; --ink:#3A2A1F; --ink-soft:#6F5A49;
+  --card-edge:rgba(255,255,255,.85); --glass:rgba(255,255,255,.62);
+  --shadow:58,42,31; --brand1:#F28C28; --brand2:#E8517A; --brand3:#3FB37F;
+  --pill-bg:#fff; --pill-ink:#2F8A5E;
+  --blob1:#FFD39A; --blob2:#FFC2D1; --blob3:#BFEFD4;
+  /* fluid scale tied to the smaller viewport side, so it fits on any screen */
+  --u:min(1vw,1.25vh);
+  --tile:clamp(92px, calc(var(--u)*21), 270px);
+  --gap:clamp(12px, calc(var(--u)*3.4), 48px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1C1724; --bg2:#2A2033; --ink:#FFF3E6; --ink-soft:#D6C4B5;
+    --card-edge:rgba(255,255,255,.18); --glass:rgba(255,255,255,.07);
+    --shadow:0,0,0; --pill-bg:#2D3B33; --pill-ink:#8BE3B4;
+    --blob1:#5A3A1E; --blob2:#4E2338; --blob3:#1D4A35;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1C1724; --bg2:#2A2033; --ink:#FFF3E6; --ink-soft:#D6C4B5;
+  --card-edge:rgba(255,255,255,.18); --glass:rgba(255,255,255,.07);
+  --shadow:0,0,0; --pill-bg:#2D3B33; --pill-ink:#8BE3B4;
+  --blob1:#5A3A1E; --blob2:#4E2338; --blob3:#1D4A35;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:"Nunito",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color:var(--ink);
+  background:radial-gradient(120% 90% at 50% 0%, var(--bg) 0%, var(--bg2) 100%) fixed;
+  background-color:var(--bg);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+/* soft background blobs */
+.blob{position:fixed;border-radius:50%;filter:blur(60px);opacity:.75;z-index:0;pointer-events:none;animation:drift 18s ease-in-out infinite alternate}
+.b1{width:46vmax;height:46vmax;background:var(--blob1);top:-18vmax;left:-14vmax}
+.b2{width:38vmax;height:38vmax;background:var(--blob2);bottom:-16vmax;right:-10vmax;animation-delay:-6s}
+.b3{width:30vmax;height:30vmax;background:var(--blob3);bottom:-12vmax;left:18vmax;animation-delay:-11s}
+@keyframes drift{to{transform:translate(4vmax,3vmax) scale(1.08)}}
+
+main{
+  position:relative;z-index:1;
+  min-height:100vh;min-height:100dvh;
+  display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;
+  gap:clamp(10px, calc(var(--u)*2.2), 32px);
+  padding:max(16px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));
+  text-align:center;
+}
+
+/* ---------- logo ---------- */
+.logo{
+  font-family:"Baloo 2",cursive;font-weight:800;letter-spacing:-.01em;line-height:1;
+  font-size:clamp(34px, calc(var(--u)*7.4), 96px);
+  background:linear-gradient(100deg,var(--brand1) 0%,var(--brand2) 50%,var(--brand3) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 4px 0 rgba(var(--shadow),.10));
+}
+.logo .heart{display:inline-block;-webkit-text-fill-color:initial;color:var(--brand2);font-size:.55em;vertical-align:.55em;margin-left:.08em;animation:beat 1.6s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.22)}30%{transform:scale(1)}45%{transform:scale(1.14)}}
+.free{
+  display:inline-flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.35em .6em;
+  margin-top:clamp(8px, calc(var(--u)*1.4), 18px);
+  padding:.45em 1.1em;border-radius:999px;
+  background:var(--pill-bg);color:var(--pill-ink);
+  font-weight:800;font-size:clamp(12px, calc(var(--u)*1.75), 19px);
+  box-shadow:0 6px 18px rgba(var(--shadow),.10), inset 0 0 0 2px rgba(63,179,127,.25);
+}
+.free b{color:var(--brand2)}
+.free .dot{opacity:.45}
+
+/* ---------- 3D tiles ---------- */
+.apps{
+  display:flex;justify-content:center;align-items:flex-start;
+  gap:var(--gap);
+  perspective:1100px;
+}
+.app{
+  --c1:#FFD68A;--c2:#F5A742;--glow:245,167,66;
+  width:var(--tile);
+  display:flex;flex-direction:column;align-items:center;gap:clamp(8px, calc(var(--u)*1.6), 20px);
+  text-decoration:none;color:inherit;
+  animation:float 6s ease-in-out infinite;
+  outline:none;
+}
+.app:nth-child(2){animation-delay:-2s}
+.app:nth-child(3){animation-delay:-4s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(calc(var(--tile)*-.06))}}
+
+.tile{
+  position:relative;width:100%;aspect-ratio:1/1;
+  border-radius:22%;
+  transform-style:preserve-3d;
+  transform:rotateX(var(--rx,8deg)) rotateY(var(--ry,0deg));
+  transition:transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .4s;
+  background:linear-gradient(145deg,var(--c1),var(--c2));
+  box-shadow:
+    inset 0 0 0 3px var(--card-edge),
+    inset 0 -10px 0 rgba(0,0,0,.08),
+    0 calc(var(--tile)*.10) calc(var(--tile)*.18) rgba(var(--glow),.38),
+    0 calc(var(--tile)*.04) 0 rgba(var(--shadow),.12);
+  will-change:transform;
+}
+/* thickness slab under the square for a real 3D block feel */
+.tile::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;
+  background:var(--c2);filter:brightness(.78);
+  transform:translateZ(calc(var(--tile)*-.07));
+}
+/* glossy moving shine */
+.tile::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(circle at var(--mx,30%) var(--my,20%), rgba(255,255,255,.65), rgba(255,255,255,0) 55%);
+  transform:translateZ(1px);
+  mix-blend-mode:soft-light;
+}
+.tile img{
+  position:absolute;inset:11%;width:78%;height:78%;
+  transform:translateZ(calc(var(--tile)*.22));
+  filter:drop-shadow(0 calc(var(--tile)*.05) calc(var(--tile)*.04) rgba(0,0,0,.22));
+  pointer-events:none;user-select:none;
+}
+.tag{
+  position:absolute;top:7%;right:-6%;
+  transform:translateZ(calc(var(--tile)*.30)) rotate(8deg);
+  background:#fff;color:#E8517A;
+  font-family:"Baloo 2",cursive;font-weight:800;line-height:1;
+  font-size:clamp(10px, calc(var(--tile)*.085), 20px);
+  padding:.45em .7em .35em;border-radius:999px;
+  box-shadow:0 4px 10px rgba(0,0,0,.15);
+}
+.app:hover .tile,.app:focus-visible .tile{
+  box-shadow:
+    inset 0 0 0 3px var(--card-edge),
+    inset 0 -10px 0 rgba(0,0,0,.08),
+    0 calc(var(--tile)*.16) calc(var(--tile)*.26) rgba(var(--glow),.55),
+    0 calc(var(--tile)*.04) 0 rgba(var(--shadow),.12);
+}
+.app:focus-visible .tile{outline:4px solid var(--brand2);outline-offset:6px}
+.name{
+  width:max-content;max-width:calc(var(--tile) + var(--gap));
+  font-family:"Baloo 2",cursive;font-weight:800;line-height:1.05;
+  font-size:clamp(14px, calc(var(--tile)*.115), 28px);
+}
+.sub{
+  display:block;margin-top:.25em;
+  font-family:"Nunito",sans-serif;font-weight:700;color:var(--ink-soft);
+  font-size:clamp(11px, calc(var(--tile)*.072), 16px);
+}
+.lumi{--c1:#FFE3A6;--c2:#F5B042;--glow:245,176,66}
+.su{--c1:#C9F3DA;--c2:#4CC38A;--glow:76,195,138}
+.pi{--c1:#FFD2B8;--c2:#F7837A;--glow:247,131,122}
+
+/* ---------- mission & parents ---------- */
+.msg{
+  width:min(100%, 880px);
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px, calc(var(--u)*2), 24px);
+}
+.box{
+  text-align:left;
+  background:var(--glass);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border:1.5px solid var(--card-edge);
+  border-radius:clamp(16px, calc(var(--u)*2.4), 26px);
+  padding:clamp(12px, calc(var(--u)*2), 22px) clamp(14px, calc(var(--u)*2.4), 26px);
+  box-shadow:0 10px 30px rgba(var(--shadow),.08);
+  font-size:clamp(13px, calc(var(--u)*1.6), 17px);line-height:1.5;font-weight:600;
+}
+.box h2{
+  font-family:"Baloo 2",cursive;font-weight:800;line-height:1.1;
+  font-size:clamp(15px, calc(var(--u)*2), 22px);margin-bottom:.3em;
+  display:flex;align-items:center;gap:.4em;
+}
+.box h2 .ic{font-size:1.15em}
+.mission h2{color:var(--brand1)}
+.parents h2{color:var(--brand2)}
+.box strong{color:var(--ink);font-weight:800}
+
+/* ---------- responsive ---------- */
+/* portrait screens (tablets, tall monitors): scale from width so the layout fills the page */
+@media (orientation:portrait){
+  :root{--u:min(1.3vw,1vh)}
+  main{justify-content:center;gap:clamp(18px,5vh,64px)}
+}
+/* phones in portrait: tiles stay side by side, sized by width */
+@media (max-width:640px) and (orientation:portrait){
+  :root{--tile:calc((100vw - 32px - 2*var(--gap))/3); --gap:clamp(10px,3.5vw,18px)}
+  main{gap:clamp(10px,3.2vh,40px)}
+  .msg{grid-template-columns:1fr}
+  .tag{right:-4%}
+  .free{font-size:clamp(11px,3.3vw,14px);padding:.45em .9em}
+  .free .dot{display:none}
+}
+/* very narrow (≤340px) – tighten text */
+@media (max-width:340px){
+  .free .dot{display:none}
+  .sub{font-size:10px}
+}
+/* short landscape screens (phones turned sideways) */
+@media (max-height:520px) and (orientation:landscape){
+  :root{--tile:clamp(80px, 24vh, 150px); --gap:clamp(14px,3vw,36px)}
+  main{justify-content:center;gap:10px;padding-top:10px;padding-bottom:10px}
+  .logo{font-size:clamp(28px,9vh,48px)}
+  .free{margin-top:6px}
+  .box{padding:8px 14px;font-size:12.5px;line-height:1.4}
+  .box h2{font-size:14px}
+}
+/* large / tall screens: let things breathe */
+@media (min-width:1600px) and (min-height:900px){
+  .msg{width:min(100%, 1040px)}
+}
+@media (prefers-reduced-motion:reduce){
+  .app,.blob,.logo .heart{animation:none}
+  .tile{transition:none}
+}
+</style>
+</head>
+<body>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+
+<main>
+  <header>
+    <h1 class="logo">Bamedonghanh<span class="heart" aria-hidden="true">♥</span></h1>
+    <p class="free">
+      <span>🎁 <b>Miễn phí 100%</b></span><span class="dot">•</span>
+      <span>Không quảng cáo</span><span class="dot">•</span>
+      <span>Không cần cài đặt</span>
+    </p>
+  </header>
+
+  <section class="apps" aria-label="Ba ứng dụng học tập miễn phí">
+    <a class="app lumi" href="https://mhtiny3ds-a11y.github.io/lumi-english-free/" target="_blank" rel="noopener">
+      <div class="tile"><img src="assets/lumi-english.svg" alt="Cú Lumi – linh vật Lumi English"><span class="tag">FREE</span></div>
+      <div class="name">Lumi English<span class="sub">Tiếng Anh lớp 1–5</span></div>
+    </a>
+    <a class="app su" href="https://mhtiny3ds-a11y.github.io/hoc-toan-vui/" target="_blank" rel="noopener">
+      <div class="tile"><img src="assets/hoc-toan-vui.svg" alt="Khủng long Su – linh vật Học Toán Vui"><span class="tag">FREE</span></div>
+      <div class="name">Học Toán Vui<span class="sub">Toán tư duy 4–8 tuổi</span></div>
+    </a>
+    <a class="app pi" href="https://mhtiny3ds-a11y.github.io/maths-easy/" target="_blank" rel="noopener">
+      <div class="tile"><img src="assets/toan-vui-cung-pi.svg" alt="Mèo Pi – linh vật Toán Vui cùng Pi"><span class="tag">FREE</span></div>
+      <div class="name">Toán Vui cùng Pi<span class="sub">Toán lớp 1–5</span></div>
+    </a>
+  </section>
+
+  <section class="msg">
+    <div class="box mission">
+      <h2><span class="ic">🌱</span>Sứ mệnh</h2>
+      <p>Mang những bài học <strong>Tiếng Anh và Toán</strong> vui, dễ hiểu đến với mọi bạn nhỏ, <strong>hoàn toàn miễn phí</strong>, để con được học bằng niềm vui, mỗi ngày tiến bộ một chút.</p>
+    </div>
+    <div class="box parents">
+      <h2><span class="ic">💛</span>Ba mẹ đồng hành</h2>
+      <p>Ba mẹ ơi, dành <strong>10 phút mỗi ngày</strong> ngồi cạnh con cùng học nhé. App chỉ là công cụ, <strong>sự đồng hành của ba mẹ</strong> mới giúp con tự tin và lớn lên mỗi ngày.</p>
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const tiles = [...document.querySelectorAll('.app')];
+
+  // Pointer tilt on devices with a mouse / trackpad
+  if (fine && !reduce) {
+    tiles.forEach(app => {
+      const t = app.querySelector('.tile');
+      app.addEventListener('pointermove', e => {
+        const r = t.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+        t.style.setProperty('--ry', ((x - .5) * 28).toFixed(2) + 'deg');
+        t.style.setProperty('--rx', ((.5 - y) * 28).toFixed(2) + 'deg');
+        t.style.setProperty('--mx', (x * 100).toFixed(1) + '%');
+        t.style.setProperty('--my', (y * 100).toFixed(1) + '%');
+      });
+      app.addEventListener('pointerleave', () => {
+        ['--rx', '--ry', '--mx', '--my'].forEach(p => t.style.removeProperty(p));
+      });
+    });
+  }
+
+  // Touch devices: gentle idle sway so the 3D depth is visible without hovering
+  if (!fine && !reduce) {
+    const start = performance.now();
+    const step = now => {
+      const s = (now - start) / 1000;
+      tiles.forEach((app, i) => {
+        const t = app.querySelector('.tile');
+        t.style.setProperty('--ry', (Math.sin(s * .9 + i * 2.1) * 10).toFixed(2) + 'deg');
+        t.style.setProperty('--rx', (8 + Math.cos(s * .7 + i * 1.7) * 5).toFixed(2) + 'deg');
+      });
+      requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+})();
+</script>
+</body>
+</html>
