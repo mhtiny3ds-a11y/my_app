@@ -1,6 +1,6 @@
 # Bamedonghanh
 
-Trang giới thiệu 3 web app học tập miễn phí cho con, đang chạy tại **https://mhtiny3ds-a11y.github.io/my_app/** (dự kiến chuyển sang tên miền bamedonghanh.com):
+Trang giới thiệu 3 web app học tập miễn phí cho con, đang chạy tại **https://bamedonghanh.pro.vn/**:
 
 - **Lumi English**: Tiếng Anh lớp 1–5 → https://mhtiny3ds-a11y.github.io/lumi-english-free/
 - **Học Toán Vui**: Toán tư duy 4–8 tuổi → https://mhtiny3ds-a11y.github.io/hoc-toan-vui/
@@ -8,24 +8,20 @@ Trang giới thiệu 3 web app học tập miễn phí cho con, đang chạy t�
 
 Một trang HTML tĩnh duy nhất (`index.html`), không cần build. Ảnh linh vật nằm trong `assets/`.
 
-## Gắn tên miền riêng (khi đã mua bamedonghanh.com)
+## Tên miền
 
-1. **Settings → Pages**: chọn *Deploy from a branch*, nhánh `main`, thư mục `/ (root)`.
-2. Ở mục *Custom domain* nhập `bamedonghanh.com`, bấm *Save* (GitHub tự tạo file `CNAME`), rồi bật *Enforce HTTPS*.
-3. Đổi `canonical` và `og:url` trong `index.html` sang `https://bamedonghanh.com/`.
-4. Tại nhà cung cấp tên miền, tạo bản ghi DNS:
-   - 4 bản ghi `A` cho `@`: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
-   - 1 bản ghi `CNAME` cho `www` → `mhtiny3ds-a11y.github.io`
+Trang dùng tên miền **bamedonghanh.pro.vn** (file `CNAME`, cài trong *Settings → Pages → Custom domain*). Địa chỉ cũ `mhtiny3ds-a11y.github.io/my_app/` tự chuyển về tên miền này.
+Nếu đổi tên miền: sửa ở *Custom domain*, rồi đổi `canonical` và `og:url` trong `index.html`.
 
 ## Hướng dẫn đưa App ra màn hình điện thoại
 
 Nút **📲 Đưa App ra màn hình điện thoại** mở bảng hướng dẫn 2 tab Android / iPhone–iPad (tự chọn tab theo máy).
-Có thể gửi thẳng link mở sẵn bảng hướng dẫn: `https://mhtiny3ds-a11y.github.io/my_app/#cai-dat`.
+Có thể gửi thẳng link mở sẵn bảng hướng dẫn: `https://bamedonghanh.pro.vn/#cai-dat`.
 
 ## Hướng dẫn sử dụng từng App
 
 Dưới mỗi ô App có nút **📖 Hướng dẫn sử dụng**, mở bảng hướng dẫn nhanh của App đó (Học Toán Vui và Toán Vui cùng Pi có thêm link tới file PDF đầy đủ).
-Link mở thẳng: `#huong-dan-lumi`, `#huong-dan-toan-vui`, `#huong-dan-pi` (ví dụ `https://mhtiny3ds-a11y.github.io/my_app/#huong-dan-pi`).
+Link mở thẳng: `#huong-dan-lumi`, `#huong-dan-toan-vui`, `#huong-dan-pi` (ví dụ `https://bamedonghanh.pro.vn/#huong-dan-pi`).
 Nội dung nằm trong khối `<dialog id="howto">` của `index.html`.
 
 ## Cập nhật mới của 3 App (11/2026)
