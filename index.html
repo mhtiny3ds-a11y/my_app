@@ -23,7 +23,7 @@
   --shadow:58,42,31; --brand1:#F28C28; --brand2:#E8517A; --brand3:#3FB37F;
   --pill-bg:#fff; --pill-ink:#2F8A5E;
   --blob1:#FFD39A; --blob2:#FFC2D1; --blob3:#BFEFD4;
-  --sheet:#FFFDF8; --chip:#FFF1DC; --line:#F0DCC0;
+  --sheet:#FFFDF8; --chip:#FFF1DC; --line:#F0DCC0; --cloud:#FFFFFF;
   /* fluid scale tied to the smaller viewport side, so it fits on any screen */
   --u:min(1vw,1.25vh);
   --tile:clamp(92px, calc(var(--u)*21), 270px);
@@ -35,7 +35,7 @@
     --card-edge:rgba(255,255,255,.18); --glass:rgba(255,255,255,.07);
     --shadow:0,0,0; --pill-bg:#2D3B33; --pill-ink:#8BE3B4;
     --blob1:#5A3A1E; --blob2:#4E2338; --blob3:#1D4A35;
-    --sheet:#2A2233; --chip:#362C40; --line:#4A3D55;
+    --sheet:#2A2233; --chip:#362C40; --line:#4A3D55; --cloud:#3A3046;
   }
 }
 :root[data-theme="dark"]{
@@ -43,7 +43,7 @@
   --card-edge:rgba(255,255,255,.18); --glass:rgba(255,255,255,.07);
   --shadow:0,0,0; --pill-bg:#2D3B33; --pill-ink:#8BE3B4;
   --blob1:#5A3A1E; --blob2:#4E2338; --blob3:#1D4A35;
-  --sheet:#2A2233; --chip:#362C40; --line:#4A3D55;
+  --sheet:#2A2233; --chip:#362C40; --line:#4A3D55; --cloud:#3A3046;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
@@ -167,6 +167,13 @@ main{
   padding:.45em .7em .35em;border-radius:999px;
   box-shadow:0 4px 10px rgba(0,0,0,.15);
 }
+.tag.pet{
+  top:auto;bottom:6%;right:auto;left:-8%;
+  transform:translateZ(calc(var(--tile)*.30)) rotate(-7deg);
+  color:#1F8A57;font-size:clamp(9px, calc(var(--tile)*.072), 17px);
+  animation:petwiggle 3.2s ease-in-out infinite;
+}
+@keyframes petwiggle{0%,86%,100%{rotate:0deg}90%{rotate:-6deg}95%{rotate:5deg}}
 .app:hover .tile,.app:focus-visible .tile{
   box-shadow:
     inset 0 0 0 3px var(--card-edge),
@@ -342,10 +349,46 @@ dialog.guide::backdrop{background:rgba(30,20,15,.45);-webkit-backdrop-filter:blu
 .howto-pdf:focus-visible{outline:3px solid var(--brand3);outline-offset:2px}
 .h-app{display:flex;align-items:center;gap:10px}
 .h-app img{width:40px;height:40px;flex:none}
+.new{display:inline-block;vertical-align:.12em;margin-right:2px;padding:.18em .5em .12em;border-radius:6px;background:#E8517A;color:#fff;font:900 10px/1 "Nunito",sans-serif;letter-spacing:.04em}
 .demo{font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:700;font-size:.92em;padding:.05em .4em;border-radius:6px;background:var(--sheet);border:1px solid var(--line)}
+
+/* ---------- slogan clouds ---------- */
+.clouds{position:fixed;inset:0;z-index:0;pointer-events:none}
+.cloud{
+  --cw:clamp(150px, calc((100vw - 920px)/2 - 36px), 250px);
+  position:relative;background:var(--cloud);color:var(--ink);
+  border-radius:999px;padding:14px 20px 13px;
+  font:700 clamp(13px, 1.05vw, 16.5px)/1.3 "Baloo 2",cursive;text-align:center;
+  filter:drop-shadow(0 8px 14px rgba(var(--shadow),.13));
+  pointer-events:auto;
+}
+.cloud::before,.cloud::after{content:"";position:absolute;background:inherit;border-radius:50%;z-index:-1}
+.cloud::before{width:min(40%,68px);aspect-ratio:1;left:12%;bottom:calc(100% - 24px)}
+.cloud::after{width:min(28%,48px);aspect-ratio:1;right:15%;bottom:calc(100% - 18px)}
+.cloud .puff{position:absolute;left:12%;bottom:calc(100% - 24px);width:min(40%,68px);aspect-ratio:1}
+.cloud .face{position:absolute;left:20%;top:30%;width:60%;height:auto;fill:currentColor;stroke:currentColor;opacity:.85}
+.cloud .face .bl{fill:#FF9DB0;stroke:none;opacity:.8}
+.cloud p{position:relative}
+.cloud.side{position:absolute;width:var(--cw);display:none;animation:cfloat 7s ease-in-out infinite}
+.cloud.side:hover{animation-play-state:paused;transform:scale(1.05) rotate(-2deg)}
+.c1{left:2.6vw;top:16vh}
+.c2{right:2.6vw;top:13vh;animation-delay:-2s!important}
+.c3{left:3.4vw;top:56vh;animation-delay:-4s!important}
+.c4{right:3.2vw;top:52vh;animation-delay:-5.5s!important}
+.c2 .puff,.c4 .puff{left:auto;right:12%}
+.c2::before,.c4::before{left:auto;right:12%}
+.c2::after,.c4::after{right:auto;left:16%}
+@keyframes cfloat{0%,100%{transform:translate(0,0)}50%{transform:translate(8px,-10px)}}
+.cloud.solo{display:none;max-width:min(92vw,440px);margin-top:max(40px,4vh);font-size:clamp(14px,3.4vw,19px);padding:14px 22px 13px;animation:cfloat 7s ease-in-out infinite}
+.cloud.solo p{transition:opacity .45s}
+.cloud.solo p.fade{opacity:0}
+/* wide landscape screens: 4 clouds in the side margins */
+@media (orientation:landscape) and (min-width:1180px) and (min-height:600px){ .cloud.side{display:block} }
+/* tall portrait screens: one cloud that cycles through the slogans */
+@media (orientation:portrait) and (min-height:760px){ .cloud.solo{display:block} }
 @media (prefers-reduced-motion:reduce){
   .app-col{animation:none}
-  .blob,.logo .heart{animation:none}
+  .blob,.logo .heart,.cloud,.tag.pet{animation:none!important}
   .tile{transition:none}
   dialog.guide[open]{animation:none}
 }
@@ -353,8 +396,10 @@ dialog.guide::backdrop{background:rgba(30,20,15,.45);-webkit-backdrop-filter:blu
 </head>
 <body>
 <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+<div class="clouds" aria-label="Lời nhắn cho ba mẹ"><div class="cloud side c1"><span class="puff" aria-hidden="true"><svg class="face" viewBox="0 0 40 18" aria-hidden="true"><circle cx="11" cy="6" r="2.6"/><circle cx="29" cy="6" r="2.6"/><path d="M16 9.5q4 4.5 8 0" fill="none" stroke-width="2.2" stroke-linecap="round"/><ellipse class="bl" cx="6" cy="11" rx="3.4" ry="2"/><ellipse class="bl" cx="34" cy="11" rx="3.4" ry="2"/></svg></span><p>Con không cần ba mẹ hoàn hảo, chỉ cần ba mẹ ở bên 💛</p></div><div class="cloud side c2"><span class="puff" aria-hidden="true"><svg class="face" viewBox="0 0 40 18" aria-hidden="true"><circle cx="11" cy="6" r="2.6"/><circle cx="29" cy="6" r="2.6"/><path d="M16 9.5q4 4.5 8 0" fill="none" stroke-width="2.2" stroke-linecap="round"/><ellipse class="bl" cx="6" cy="11" rx="3.4" ry="2"/><ellipse class="bl" cx="34" cy="11" rx="3.4" ry="2"/></svg></span><p>10 phút mỗi ngày bên con, cả đời con nhớ mãi</p></div><div class="cloud side c3"><span class="puff" aria-hidden="true"><svg class="face" viewBox="0 0 40 18" aria-hidden="true"><circle cx="11" cy="6" r="2.6"/><circle cx="29" cy="6" r="2.6"/><path d="M16 9.5q4 4.5 8 0" fill="none" stroke-width="2.2" stroke-linecap="round"/><ellipse class="bl" cx="6" cy="11" rx="3.4" ry="2"/><ellipse class="bl" cx="34" cy="11" rx="3.4" ry="2"/></svg></span><p>Khen con cố gắng, đừng chỉ khen điểm số ⭐</p></div><div class="cloud side c4"><span class="puff" aria-hidden="true"><svg class="face" viewBox="0 0 40 18" aria-hidden="true"><circle cx="11" cy="6" r="2.6"/><circle cx="29" cy="6" r="2.6"/><path d="M16 9.5q4 4.5 8 0" fill="none" stroke-width="2.2" stroke-linecap="round"/><ellipse class="bl" cx="6" cy="11" rx="3.4" ry="2"/><ellipse class="bl" cx="34" cy="11" rx="3.4" ry="2"/></svg></span><p>Sai cũng không sao, mình cùng thử lại nhé!</p></div></div>
 
 <main>
+  <div class="cloud solo" aria-live="off"><span class="puff" aria-hidden="true"><svg class="face" viewBox="0 0 40 18" aria-hidden="true"><circle cx="11" cy="6" r="2.6"/><circle cx="29" cy="6" r="2.6"/><path d="M16 9.5q4 4.5 8 0" fill="none" stroke-width="2.2" stroke-linecap="round"/><ellipse class="bl" cx="6" cy="11" rx="3.4" ry="2"/><ellipse class="bl" cx="34" cy="11" rx="3.4" ry="2"/></svg></span><p id="soloText">Con không cần ba mẹ hoàn hảo, chỉ cần ba mẹ ở bên 💛</p></div>
   <header>
     <h1 class="logo">Bamedonghanh<span class="heart" aria-hidden="true">♥</span></h1>
     <p class="free">
@@ -367,21 +412,21 @@ dialog.guide::backdrop{background:rgba(30,20,15,.45);-webkit-backdrop-filter:blu
   <section class="apps" aria-label="Ba ứng dụng học tập miễn phí">
     <div class="app-col lumi">
       <a class="app" href="https://mhtiny3ds-a11y.github.io/lumi-english-free/" target="_blank" rel="noopener">
-        <div class="tile"><img src="assets/lumi-english.svg" alt="Cú Lumi – linh vật Lumi English"><span class="tag">FREE</span></div>
+        <div class="tile"><img src="assets/lumi-english.svg" alt="Cú Lumi – linh vật Lumi English"><span class="tag">FREE</span><span class="tag pet" title="Mới: nuôi thú cưng bằng việc học">🐾 Thú cưng</span></div>
         <div class="name">Lumi English<span class="sub">Tiếng Anh lớp 1–5</span></div>
       </a>
       <button class="howto" type="button" data-howto="lumi" aria-haspopup="dialog" aria-label="Hướng dẫn sử dụng Lumi English"><span aria-hidden="true">📖</span>Hướng dẫn<span class="long"> sử dụng</span></button>
     </div>
     <div class="app-col su">
       <a class="app" href="https://mhtiny3ds-a11y.github.io/hoc-toan-vui/" target="_blank" rel="noopener">
-        <div class="tile"><img src="assets/hoc-toan-vui.svg" alt="Khủng long Su – linh vật Học Toán Vui"><span class="tag">FREE</span></div>
+        <div class="tile"><img src="assets/hoc-toan-vui.svg" alt="Khủng long Su – linh vật Học Toán Vui"><span class="tag">FREE</span><span class="tag pet" title="Mới: nuôi thú cưng bằng việc học">🐾 Thú cưng</span></div>
         <div class="name">Học Toán Vui<span class="sub">Toán tư duy 4–8 tuổi</span></div>
       </a>
       <button class="howto" type="button" data-howto="toan-vui" aria-haspopup="dialog" aria-label="Hướng dẫn sử dụng Học Toán Vui"><span aria-hidden="true">📖</span>Hướng dẫn<span class="long"> sử dụng</span></button>
     </div>
     <div class="app-col pi">
       <a class="app" href="https://mhtiny3ds-a11y.github.io/maths-easy/" target="_blank" rel="noopener">
-        <div class="tile"><img src="assets/toan-vui-cung-pi.svg" alt="Mèo Pi – linh vật Toán Vui cùng Pi"><span class="tag">FREE</span></div>
+        <div class="tile"><img src="assets/toan-vui-cung-pi.svg" alt="Mèo Pi – linh vật Toán Vui cùng Pi"><span class="tag">FREE</span><span class="tag pet" title="Mới: nuôi thú cưng bằng việc học">🐾 Thú cưng</span></div>
         <div class="name">Toán Vui cùng Pi<span class="sub">Toán lớp 1–5</span></div>
       </a>
       <button class="howto" type="button" data-howto="pi" aria-haspopup="dialog" aria-label="Hướng dẫn sử dụng Toán Vui cùng Pi"><span aria-hidden="true">📖</span>Hướng dẫn<span class="long"> sử dụng</span></button>
@@ -454,8 +499,8 @@ dialog.guide::backdrop{background:rgba(30,20,15,.45);-webkit-backdrop-filter:blu
         <li><div><b>Ba mẹ tạo tài khoản gia đình</b> bằng số điện thoại/email và mật khẩu, rồi đặt thêm <b>mã PIN ba mẹ</b> (4 số).</div></li>
         <li><div><b>Thêm hồ sơ cho con</b>. Mỗi con có hình đại diện và <b>mã PIN 4 số</b> riêng.</div></li>
         <li><div><b>Con chọn hình mình, nhập PIN</b>, rồi chọn lớp muốn học (lớp 1–5). Lớp của con có dấu ⭐, con vẫn được ôn lại các lớp dưới.</div></li>
-        <li><div>Trong mỗi lớp, các <b>Unit mở lần lượt</b> theo thứ tự sách. App <b>đọc tiếng Anh</b> bằng giọng có sẵn trong máy; nếu máy chưa có, bài học sẽ hướng dẫn cài.</div></li>
-        <li><div><b>Khu vực ba mẹ</b>: xem tiến độ, gợi ý bài cần ôn, duyệt nhiệm vụ, tặng sao, ghi sổ trao thưởng, sao lưu dữ liệu. Khu vực này <b>tự khóa sau 10 phút</b> để con không tự duyệt.</div></li>
+        <li><div>Trong mỗi lớp, các <b>Unit mở lần lượt</b> theo lộ trình. App <b>đọc tiếng Anh</b> bằng giọng có sẵn trong máy; nếu máy chưa có, bài học sẽ hướng dẫn cài.</div></li>
+        <li><div><span class="new">MỚI</span> <b>🐾 Thú cưng</b>: ở tab Thú cưng, con chọn nuôi <b>Gà con, Cún con, Mèo con hoặc Rồng con</b> và đặt tên. Mỗi bài học xong thú cưng được ăn (bài 3 sao được 2 bữa), lớn dần từ <b>Quả trứng</b> đến <b>Siêu sao</b>. Con nghỉ học thì thú cưng chỉ đói bụng, không bao giờ bị mất.</div></li><li><div><span class="new">MỚI</span> <b>🔓 Mở khóa bài theo trình độ</b>: Khu vực ba mẹ → Tài khoản → <b>Mở khóa bài theo trình độ của con</b> → <b>🔓 Chọn bài</b>. Ba mẹ mở bất kỳ Unit nào hoặc cả lớp cho từng con; bấm <b>Về lộ trình</b> để khóa lại.</div></li><li><div><b>Khu vực ba mẹ</b>: xem tiến độ, gợi ý bài cần ôn, duyệt nhiệm vụ, tặng sao, ghi sổ trao thưởng, sao lưu dữ liệu. Khu vực này <b>tự khóa sau 10 phút</b> để con không tự duyệt.</div></li>
       </ol>
       <p class="note">👀 Muốn xem thử trước? Ở màn hình đầu bấm <b>“Mở gia đình mẫu”</b>: ba mẹ <span class="demo">demo</span> / <span class="demo">123456</span>, PIN ba mẹ <span class="demo">0000</span>; con Bông PIN <span class="demo">1111</span>, Tí PIN <span class="demo">2222</span>.</p>
       <p class="note" style="background:rgba(242,140,40,.12)">💾 Dữ liệu chỉ lưu trên máy của gia đình. Ba mẹ nên vào <b>Tài khoản → Sao lưu dữ liệu</b> để tải file sao lưu định kỳ, và dùng file này khi chuyển sang máy khác.</p>
@@ -467,7 +512,7 @@ dialog.guide::backdrop{background:rgba(30,20,15,.45);-webkit-backdrop-filter:blu
         <li><div><b>Bản đồ học</b> có 6 chặng, 120 bài, từ đếm số đến bảng nhân. Bài mở lần lượt, sau mỗi 5 bài có một <b>Thử thách</b>.</div></li>
         <li><div>Mỗi bài 5–10 phút: <b>Học</b> cùng khủng long Su → <b>Luyện tập</b> 8 câu → <b>Nhiệm vụ ở nhà</b> làm cùng ba mẹ.</div></li>
         <li><div><b>Sao thưởng</b>: mỗi bài 1–3 sao, nhiệm vụ được ba mẹ xác nhận thêm +2 sao. Gợi ý 1 sao = 1.000đ, tối đa 50 sao/tuần.</div></li>
-        <li><div><b>Khu vực ba mẹ</b>: xem tiến độ, gợi ý bài cần ôn, duyệt nhiệm vụ, tặng sao, ghi sổ trao thưởng, sao lưu dữ liệu. Khu vực này <b>tự khóa sau 10 phút</b> để con không tự duyệt.</div></li>
+        <li><div><span class="new">MỚI</span> <b>🐾 Thú cưng</b>: con chọn nuôi <b>Rồng Lửa, Mèo Mây hoặc Cún Sao</b> và đặt tên. Mỗi bài hay thử thách xong, thú cưng được ăn và lớn dần từ <b>Quả trứng</b> đến <b>Huyền thoại</b>, đổi hình dáng theo lộ trình học. Ngày chưa học thì thú cưng ngủ gật nhắc con.</div></li><li><div><span class="new">MỚI</span> <b>🔓 Mở khóa bài theo trình độ</b>: Khu vực ba mẹ (tab Tổng quan hoặc Tài khoản) → <b>Mở khóa bài theo trình độ</b>. Ba mẹ tích từng bài, mở cả chặng hoặc cả 120 bài cho từng con; bỏ tích để khóa lại, kết quả đã học vẫn giữ.</div></li><li><div><b>Khu vực ba mẹ</b>: xem tiến độ, gợi ý bài cần ôn, duyệt nhiệm vụ, tặng sao, ghi sổ trao thưởng, sao lưu dữ liệu. Khu vực này <b>tự khóa sau 10 phút</b> để con không tự duyệt.</div></li>
       </ol>
       <p class="note">👀 Muốn xem thử trước? Ở màn hình đầu bấm <b>“Mở gia đình mẫu”</b>: ba mẹ <span class="demo">demo</span> / <span class="demo">123456</span>, PIN ba mẹ <span class="demo">0000</span>; con Bông PIN <span class="demo">1111</span>, Tí PIN <span class="demo">2222</span>.</p>
       <a class="howto-pdf" href="https://mhtiny3ds-a11y.github.io/hoc-toan-vui/tai-lieu/Huong-dan-su-dung-Hoc-Toan-Vui.pdf" target="_blank" rel="noopener">📘 Xem hướng dẫn đầy đủ (PDF)</a>
@@ -479,7 +524,7 @@ dialog.guide::backdrop{background:rgba(30,20,15,.45);-webkit-backdrop-filter:blu
         <li><div><b>Lộ trình</b> 206 bài chia theo chủ đề, bài sau mở khi xong bài trước. Cuối mỗi chủ đề có bài ôn tập.</div></li>
         <li><div>Mỗi bài 2 bước: <b>Bài học</b> (mèo Pi giảng, làm mẫu 2 ví dụ, con làm thử 4 câu) → <b>Luyện tập</b> 10 câu. Trả lời sai thì Pi giải thích.</div></li>
         <li><div><b>Nhiệm vụ thực tế</b> mỗi chủ đề (đo bàn học, đếm tiền đi chợ…): ba mẹ xác nhận thì con được +2 sao.</div></li>
-        <li><div><b>Khu vực ba mẹ</b>: xem tiến độ, gợi ý bài cần ôn, duyệt nhiệm vụ, tặng sao, ghi sổ trao thưởng, sao lưu dữ liệu. Khu vực này <b>tự khóa sau 10 phút</b> để con không tự duyệt.</div></li>
+        <li><div><span class="new">MỚI</span> <b>🐾 Thú cưng</b>: con chọn nuôi <b>Rồng Mây, Thỏ Bông, Cún Đốm hoặc Gà Lửa</b>. Mỗi bước học xong thú cưng được ăn và lên cấp, nhiệm vụ được duyệt thêm +3 điểm lớn; thú cưng đổi hình qua 6 giai đoạn, từ <b>Quả trứng</b> đến <b>Huyền thoại</b>.</div></li><li><div><span class="new">MỚI</span> <b>🔓 Mở khóa bài theo trình độ</b>: từ thẻ của con ở tab Tổng quan hoặc mục Tài khoản, ba mẹ chọn lớp rồi mở <b>bài bất kỳ</b>, hoặc bấm <b>Bắt đầu từ đây</b> để con học tiếp từ bài đó. Có nút <b>Mở cả lớp</b> và <b>Khóa lại như cũ</b>.</div></li><li><div><b>Khu vực ba mẹ</b>: xem tiến độ, gợi ý bài cần ôn, duyệt nhiệm vụ, tặng sao, ghi sổ trao thưởng, sao lưu dữ liệu. Khu vực này <b>tự khóa sau 10 phút</b> để con không tự duyệt.</div></li>
       </ol>
       <p class="note">👀 Muốn xem thử trước? Ở màn hình đầu bấm <b>“Mở gia đình mẫu”</b>: ba mẹ <span class="demo">demo</span> / <span class="demo">123456</span>, PIN ba mẹ <span class="demo">0000</span>; con Bông PIN <span class="demo">1111</span>, Tí PIN <span class="demo">2222</span>.</p>
       <a class="howto-pdf" href="https://mhtiny3ds-a11y.github.io/maths-easy/docs/Huong-dan-su-dung-Toan-Vui-cung-Pi.pdf" target="_blank" rel="noopener">📘 Xem hướng dẫn đầy đủ (PDF)</a>
@@ -548,6 +593,16 @@ dialog.guide::backdrop{background:rgba(30,20,15,.45);-webkit-backdrop-filter:blu
   document.getElementById('closeGuide').addEventListener('click', () => dlg.close());
   dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
   if (location.hash === '#cai-dat') dlg.showModal();
+
+  // ---------- slogan cloud (portrait screens) ----------
+  const SLOGANS = ["Con không cần ba mẹ hoàn hảo, chỉ cần ba mẹ ở bên 💛", "10 phút mỗi ngày bên con, cả đời con nhớ mãi", "Khen con cố gắng, đừng chỉ khen điểm số ⭐", "Sai cũng không sao, mình cùng thử lại nhé!", "Mỗi ngày một chút, con lớn lên từng chút 🌱", "Ba mẹ là người thầy đầu tiên và mãi mãi của con"];
+  const solo = document.getElementById('soloText');
+  let si = 0;
+  setInterval(() => {
+    if (!solo.offsetParent) return;
+    solo.classList.add('fade');
+    setTimeout(() => { si = (si + 1) % SLOGANS.length; solo.textContent = SLOGANS[si]; solo.classList.remove('fade'); }, reduce ? 0 : 450);
+  }, 5000);
 
   // ---------- per-app user guide ----------
   const how = document.getElementById('howto');
