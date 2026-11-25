@@ -1,10 +1,11 @@
 # Bamedonghanh
 
-Trang giới thiệu 3 web app học tập miễn phí cho con, đang chạy tại **https://bamedonghanh.pro.vn/**:
+Trang giới thiệu 4 web app học tập miễn phí cho con, đang chạy tại **https://bamedonghanh.pro.vn/**:
 
 - **Lumi English**: Tiếng Anh lớp 1–5 → https://mhtiny3ds-a11y.github.io/lumi-english-free/
 - **Học Toán Vui**: Toán tư duy 4–8 tuổi → https://mhtiny3ds-a11y.github.io/hoc-toan-vui/
 - **Toán Vui cùng Pi**: Toán lớp 1–5 → https://mhtiny3ds-a11y.github.io/maths-easy/
+- **Senapp**: Kỹ năng sống 6–11 tuổi → https://mhtiny3ds-a11y.github.io/senapp/public/
 
 Một trang HTML tĩnh duy nhất (`index.html`), không cần build. Ảnh linh vật nằm trong `assets/`.
 
@@ -21,7 +22,7 @@ Có thể gửi thẳng link mở sẵn bảng hướng dẫn: `https://bamedong
 ## Hướng dẫn sử dụng từng App
 
 Dưới mỗi ô App có nút **📖 Hướng dẫn sử dụng**, mở bảng hướng dẫn nhanh của App đó (Học Toán Vui và Toán Vui cùng Pi có thêm link tới file PDF đầy đủ).
-Link mở thẳng: `#huong-dan-lumi`, `#huong-dan-toan-vui`, `#huong-dan-pi` (ví dụ `https://bamedonghanh.pro.vn/#huong-dan-pi`).
+Link mở thẳng: `#huong-dan-lumi`, `#huong-dan-toan-vui`, `#huong-dan-pi`, `#huong-dan-sen` (ví dụ `https://bamedonghanh.pro.vn/#huong-dan-pi`).
 Nội dung nằm trong khối `<dialog id="howto">` của `index.html`.
 
 ## Cập nhật mới của 3 App (11/2026)
@@ -43,6 +44,6 @@ Trên trang giới thiệu: mỗi ô App có nhãn **🐾 Thú cưng**, và bả
 
 ## Sửa nội dung
 
-- Đổi link app: sửa thuộc tính `href` của 3 thẻ `<a class="app ...">` trong `index.html`.
+- Đổi link app: sửa thuộc tính `href` của 4 thẻ `<a class="app ...">` trong `index.html`.
 - Đổi ảnh: thay file trong `assets/` (giữ nguyên tên) hoặc sửa `src` của thẻ `<img>`.
 - Đổi chữ Sứ mệnh / Ba mẹ đồng hành: sửa 2 khối `.box` cuối `index.html`.

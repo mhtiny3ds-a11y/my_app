@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Bamedonghanh</title>
-<meta name="description" content="Bamedonghanh – 3 web app học tập miễn phí cho con: Lumi English, Học Toán Vui, Toán Vui cùng Pi. Ba mẹ đồng hành, con lớn lên mỗi ngày.">
+<meta name="description" content="Bamedonghanh – 4 web app học tập miễn phí cho con: Lumi English, Học Toán Vui, Toán Vui cùng Pi, Senapp. Ba mẹ đồng hành, con lớn lên mỗi ngày.">
 <link rel="canonical" href="https://bamedonghanh.pro.vn/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://bamedonghanh.pro.vn/">
 <meta property="og:title" content="Bamedonghanh – Ba mẹ đồng hành cùng con">
-<meta property="og:description" content="3 web app học Tiếng Anh và Toán miễn phí 100%, không quảng cáo, dành cho học sinh tiểu học.">
+<meta property="og:description" content="4 web app học Tiếng Anh, Toán và Kỹ năng sống miễn phí 100%, không quảng cáo, dành cho học sinh tiểu học.">
 <meta name="theme-color" content="#FFF5E4" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#1C1724" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -195,6 +195,10 @@ main{
 .lumi{--c1:#FFE3A6;--c2:#F5B042;--glow:245,176,66;--btn:#B56A0E}
 .su{--c1:#C9F3DA;--c2:#4CC38A;--glow:76,195,138;--btn:#1F8A57}
 .pi{--c1:#FFD2B8;--c2:#F7837A;--glow:247,131,122;--btn:#C9473E}
+.sen{--c1:#FFDCE6;--c2:#EE7799;--glow:238,119,153;--btn:#C8102E}
+.app-col:nth-child(4){animation-delay:-3s}
+/* 4 App: o nho hon mot chut de van vua mot man hinh */
+:root{--tile:min(clamp(84px, calc(var(--u)*17.5), 236px), calc((100vw - 40px - 3*var(--gap))/4))}
 
 /* ---------- mission & parents ---------- */
 .msg{
@@ -229,7 +233,11 @@ main{
 }
 /* phones in portrait: tiles stay side by side, sized by width */
 @media (max-width:640px) and (orientation:portrait){
-  :root{--tile:calc((100vw - 32px - 2*var(--gap))/3); --gap:clamp(10px,3.5vw,18px)}
+  :root{--tile:calc((100vw - 32px - 3*var(--gap))/4); --gap:clamp(8px,2.6vw,14px)}
+  .name{font-size:min(3.4vw,14px)}
+  .sub{font-size:min(2.7vw,11px)}
+  .howto{font-size:min(2.55vw,11px)!important;padding:.45em .5em!important;gap:.2em!important}
+  .tag.pet{font-size:min(2.2vw,9px)}
   main{gap:clamp(10px,3.2vh,40px)}
   .msg{grid-template-columns:1fr}
   .tag{right:-4%}
@@ -409,7 +417,7 @@ dialog.guide::backdrop{background:rgba(30,20,15,.45);-webkit-backdrop-filter:blu
     </p>
   </header>
 
-  <section class="apps" aria-label="Ba ứng dụng học tập miễn phí">
+  <section class="apps" aria-label="Bốn ứng dụng học tập miễn phí">
     <div class="app-col lumi">
       <a class="app" href="https://mhtiny3ds-a11y.github.io/lumi-english-free/" target="_blank" rel="noopener">
         <div class="tile"><img src="assets/lumi-english.svg" alt="Cú Lumi – linh vật Lumi English"><span class="tag">FREE</span><span class="tag pet" title="Mới: nuôi thú cưng bằng việc học">🐾 Thú cưng</span></div>
@@ -431,12 +439,19 @@ dialog.guide::backdrop{background:rgba(30,20,15,.45);-webkit-backdrop-filter:blu
       </a>
       <button class="howto" type="button" data-howto="pi" aria-haspopup="dialog" aria-label="Hướng dẫn sử dụng Toán Vui cùng Pi"><span aria-hidden="true">📖</span>Hướng dẫn<span class="long"> sử dụng</span></button>
     </div>
+    <div class="app-col sen">
+      <a class="app" href="https://mhtiny3ds-a11y.github.io/senapp/public/" target="_blank" rel="noopener">
+        <div class="tile"><img src="assets/senapp.webp" alt="Hoa sen Sen – linh vật Senapp"><span class="tag">FREE</span><span class="tag pet" style="color:#C8102E" title="Mới: App kỹ năng sống">🌸 Mới</span></div>
+        <div class="name">Senapp<span class="sub">Kỹ năng sống 6–11 tuổi</span></div>
+      </a>
+      <button class="howto" type="button" data-howto="sen" aria-haspopup="dialog" aria-label="Hướng dẫn sử dụng Senapp"><span aria-hidden="true">📖</span>Hướng dẫn<span class="long"> sử dụng</span></button>
+    </div>
   </section>
 
   <section class="msg">
     <div class="box mission">
       <h2><span class="ic">🌱</span>Sứ mệnh</h2>
-      <p>Mang những bài học <strong>Tiếng Anh và Toán</strong> vui, dễ hiểu đến với mọi bạn nhỏ, <strong>hoàn toàn miễn phí</strong>, để con được học bằng niềm vui, mỗi ngày tiến bộ một chút.</p>
+      <p>Mang những bài học <strong>Tiếng Anh, Toán và Kỹ năng sống</strong> vui, dễ hiểu đến với mọi bạn nhỏ, <strong>hoàn toàn miễn phí</strong>, để con được học bằng niềm vui, mỗi ngày tiến bộ một chút.</p>
     </div>
     <div class="box parents">
       <h2><span class="ic">💛</span>Ba mẹ đồng hành</h2>
@@ -463,6 +478,7 @@ dialog.guide::backdrop{background:rgba(30,20,15,.45);-webkit-backdrop-filter:blu
               <a href="https://mhtiny3ds-a11y.github.io/lumi-english-free/" target="_blank" rel="noopener"><img src="assets/lumi-english.svg" alt="">Lumi English</a>
               <a href="https://mhtiny3ds-a11y.github.io/hoc-toan-vui/" target="_blank" rel="noopener"><img src="assets/hoc-toan-vui.svg" alt="">Học Toán Vui</a>
               <a href="https://mhtiny3ds-a11y.github.io/maths-easy/" target="_blank" rel="noopener"><img src="assets/toan-vui-cung-pi.svg" alt="">Toán Vui cùng Pi</a>
+              <a href="https://mhtiny3ds-a11y.github.io/senapp/public/" target="_blank" rel="noopener"><img src="assets/senapp.webp" alt="">Senapp</a>
             </div></div></li>
         <li><div>Bấm nút <span class="key"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>Menu</span> ở <b>góc trên bên phải</b> trình duyệt.</div></li>
         <li><div>Chọn <span class="key"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="M12 8v8M8 12h8"/></svg>Thêm vào màn hình chính</span> (một số máy ghi là <b>“Cài đặt ứng dụng”</b>).</div></li>
@@ -477,6 +493,7 @@ dialog.guide::backdrop{background:rgba(30,20,15,.45);-webkit-backdrop-filter:blu
               <a href="https://mhtiny3ds-a11y.github.io/lumi-english-free/" target="_blank" rel="noopener"><img src="assets/lumi-english.svg" alt="">Lumi English</a>
               <a href="https://mhtiny3ds-a11y.github.io/hoc-toan-vui/" target="_blank" rel="noopener"><img src="assets/hoc-toan-vui.svg" alt="">Học Toán Vui</a>
               <a href="https://mhtiny3ds-a11y.github.io/maths-easy/" target="_blank" rel="noopener"><img src="assets/toan-vui-cung-pi.svg" alt="">Toán Vui cùng Pi</a>
+              <a href="https://mhtiny3ds-a11y.github.io/senapp/public/" target="_blank" rel="noopener"><img src="assets/senapp.webp" alt="">Senapp</a>
             </div></div></li>
         <li><div>Bấm nút <span class="key"><svg viewBox="0 0 24 24" fill="none" stroke="#2F7BF6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5"/><path d="M6 11H5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1h-1"/></svg>Chia sẻ</span> ở <b>thanh dưới cùng</b> (trên iPad nút nằm ở góc trên).</div></li>
         <li><div>Kéo danh sách lên, chọn <span class="key"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="M12 8v8M8 12h8"/></svg>Thêm vào MH chính</span>.</div></li>
@@ -484,7 +501,7 @@ dialog.guide::backdrop{background:rgba(30,20,15,.45);-webkit-backdrop-filter:blu
       </ol>
       <p class="note">💡 Nên dùng <b>Safari</b>. Nếu không thấy mục “Thêm vào MH chính”, kéo xuống cuối danh sách, bấm <b>“Sửa tác vụ”</b> để bật mục này.</p>
     </section>
-    <p class="note" style="background:rgba(232,81,122,.10)">💛 Làm lần lượt cho cả 3 App. Từ lần sau, con chỉ cần chạm vào biểu tượng là học được ngay, như một App thật. Tiến độ học của con vẫn được giữ nguyên.</p>
+    <p class="note" style="background:rgba(232,81,122,.10)">💛 Làm lần lượt cho cả 4 App. Từ lần sau, con chỉ cần chạm vào biểu tượng là học được ngay, như một App thật. Tiến độ học của con vẫn được giữ nguyên.</p>
   </div>
 </dialog>
 
@@ -528,6 +545,18 @@ dialog.guide::backdrop{background:rgba(30,20,15,.45);-webkit-backdrop-filter:blu
       </ol>
       <p class="note">👀 Muốn xem thử trước? Ở màn hình đầu bấm <b>“Mở gia đình mẫu”</b>: ba mẹ <span class="demo">demo</span> / <span class="demo">123456</span>, PIN ba mẹ <span class="demo">0000</span>; con Bông PIN <span class="demo">1111</span>, Tí PIN <span class="demo">2222</span>.</p>
       <a class="howto-pdf" href="https://mhtiny3ds-a11y.github.io/maths-easy/docs/Huong-dan-su-dung-Toan-Vui-cung-Pi.pdf" target="_blank" rel="noopener">📘 Xem hướng dẫn đầy đủ (PDF)</a>
+    </section>
+    <section class="panel" data-app="sen" data-title="Senapp" data-img="assets/senapp.webp" hidden>
+      <ol class="steps">
+        <li><div><b>Ba mẹ tạo tài khoản gia đình</b> ngay trong App: tên, số điện thoại và <b>mã PIN ba mẹ</b> (4 số). Miễn phí, không cần mật khẩu.</div></li>
+        <li><div>Vào <b>Quản lý tài khoản</b>, <b>thêm tài khoản cho con</b> (mỗi con một <b>mã PIN 4 số</b>, lộ trình theo tuổi), thêm ba/mẹ còn lại và ông bà nếu cần. Bao nhiêu con cũng được.</div></li>
+        <li><div>Mỗi ngày con học <b>1 bài khoảng 7 phút</b> cùng hoa sen Sen: 3 tình huống <b>ở nhà, trên lớp, ngoài đời</b> → câu đố → nhận <b>1 nhiệm vụ đời thực</b>.</div></li>
+        <li><div>Con làm nhiệm vụ thật, <b>ba mẹ xác nhận</b> thì con nhận sao và huy hiệu. <b>9 kỹ năng sống</b>, 240 bài và 240 nhiệm vụ cho 48 tuần.</div></li>
+        <li><div><b>Khu vực ba mẹ</b>: <b>Danh mục bài học &amp; nhiệm vụ</b> để đổi thứ tự, ẩn, thêm, sửa tự do; duyệt nhiệm vụ; nhắc giờ học; <b>sao lưu dữ liệu</b>.</div></li>
+      </ol>
+      <p class="note">👀 Muốn xem thử trước? Ở màn hình đầu bấm <b>“Tạo tài khoản gia đình”</b> → <b>“Mở gia đình mẫu”</b>: ba mẹ ID <span class="demo">0901234567</span>, PIN <span class="demo">9999</span>; con Minh Phúc PIN <span class="demo">1234</span>, Ngọc Minh PIN <span class="demo">2468</span>.</p>
+      <p class="note" style="background:rgba(242,140,40,.12)">💾 Dữ liệu chỉ lưu trên máy của gia đình. Ba mẹ nên vào <b>Quản lý tài khoản → Tải file sao lưu</b> định kỳ, và dùng file này khi chuyển sang máy khác.</p>
+      <a class="howto-pdf" href="https://mhtiny3ds-a11y.github.io/senapp/public/trang-chu/" target="_blank" rel="noopener">🌸 Xem trang giới thiệu Senapp</a>
     </section>
   </div>
 </dialog>
@@ -619,7 +648,7 @@ dialog.guide::backdrop{background:rgba(30,20,15,.45);-webkit-backdrop-filter:blu
   document.querySelectorAll('[data-howto]').forEach(b => b.addEventListener('click', () => openHow(b.dataset.howto)));
   document.getElementById('closeHowto').addEventListener('click', () => how.close());
   how.addEventListener('click', e => { if (e.target === how) how.close(); });
-  const m = location.hash.match(/^#huong-dan-(lumi|toan-vui|pi)$/);
+  const m = location.hash.match(/^#huong-dan-(lumi|toan-vui|pi|sen)$/);
   if (m) openHow(m[1]);
 })();
 </script>
