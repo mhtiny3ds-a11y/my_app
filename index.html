@@ -258,6 +258,7 @@ main{
   .howto{font-size:11.5px;padding:.4em .8em}
   .app{gap:4px}.app-col{gap:5px}
   .sub{display:none}
+  .name{font-size:11.5px;white-space:nowrap;max-width:none}
   main{justify-content:center;gap:10px;padding-top:6px;padding-bottom:6px}
   .logo{font-size:clamp(28px,9vh,48px)}
   .free{margin-top:6px}
@@ -270,6 +271,21 @@ main{
 }
 
 /* ---------- install button + guide ---------- */
+.actions{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+.fb-btn{
+  display:inline-flex;align-items:center;gap:.5em;text-decoration:none;
+  font:800 clamp(13px, calc(var(--u)*1.7), 18px)/1 "Nunito",sans-serif;
+  color:#1877F2;background:var(--pill-bg);border-radius:999px;
+  padding:.62em 1.2em .62em .62em;
+  box-shadow:0 8px 20px rgba(24,119,242,.18), inset 0 0 0 2px rgba(24,119,242,.25);
+  transition:transform .2s, box-shadow .2s;
+}
+.fb-btn svg{width:1.6em;height:1.6em;flex:none}
+.fb-btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(24,119,242,.28), inset 0 0 0 2px rgba(24,119,242,.35)}
+.fb-btn:focus-visible{outline:3px solid var(--brand3);outline-offset:3px}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .fb-btn{color:#8AB8FF} }
+:root[data-theme="dark"] .fb-btn{color:#8AB8FF}
+@media (max-width:420px){ .fb-btn .lbl{display:none} .fb-btn{padding:.5em} }
 .install-btn{
   display:inline-flex;align-items:center;gap:.5em;cursor:pointer;
   font:800 clamp(13px, calc(var(--u)*1.7), 18px)/1 "Nunito",sans-serif;
@@ -344,11 +360,13 @@ dialog.guide::backdrop{background:rgba(30,20,15,.45);-webkit-backdrop-filter:blu
   .box{padding:9px 13px;font-size:12.5px;line-height:1.4}
   .box h2{font-size:14.5px}
   .install-btn{padding:.7em 1.2em;font-size:13px}
+  .fb-btn{font-size:13px}
 }
 /* short landscape: compact button */
 @media (max-height:520px) and (orientation:landscape){
   main{gap:6px}
   .install-btn{padding:.55em 1.1em;font-size:12.5px}
+  .fb-btn{font-size:12.5px;padding:.45em .9em .45em .45em}
 }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .howto{color:#fff} }
 :root[data-theme="dark"] .howto{color:#fff}
@@ -358,12 +376,17 @@ dialog.guide::backdrop{background:rgba(30,20,15,.45);-webkit-backdrop-filter:blu
 .h-app{display:flex;align-items:center;gap:10px}
 .h-app img{width:40px;height:40px;flex:none}
 .new{display:inline-block;vertical-align:.12em;margin-right:2px;padding:.18em .5em .12em;border-radius:6px;background:#E8517A;color:#fff;font:900 10px/1 "Nunito",sans-serif;letter-spacing:.04em}
+.fb-note{display:flex;gap:10px;align-items:flex-start;margin-top:12px;padding:11px 14px;border-radius:14px;text-decoration:none;color:var(--ink);
+  background:rgba(24,119,242,.09);font-size:13.5px;line-height:1.45;font-weight:600;text-align:left}
+.fb-note svg{width:26px;height:26px;flex:none;margin-top:1px}
+.fb-note b{font-weight:800;color:#1877F2}
+.fb-note:focus-visible{outline:3px solid var(--brand2);outline-offset:2px}
 .demo{font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:700;font-size:.92em;padding:.05em .4em;border-radius:6px;background:var(--sheet);border:1px solid var(--line)}
 
 /* ---------- slogan clouds ---------- */
 .clouds{position:fixed;inset:0;z-index:0;pointer-events:none}
 .cloud{
-  --cw:clamp(150px, calc((100vw - 920px)/2 - 36px), 250px);
+  --cw:clamp(130px, calc((100vw - 4*var(--tile) - 3*var(--gap))/2 - 2.6vw - 40px), 240px);
   position:relative;background:var(--cloud);color:var(--ink);
   border-radius:999px;padding:14px 20px 13px;
   font:700 clamp(13px, 1.05vw, 16.5px)/1.3 "Baloo 2",cursive;text-align:center;
@@ -381,8 +404,8 @@ dialog.guide::backdrop{background:rgba(30,20,15,.45);-webkit-backdrop-filter:blu
 .cloud.side:hover{animation-play-state:paused;transform:scale(1.05) rotate(-2deg)}
 .c1{left:2.6vw;top:16vh}
 .c2{right:2.6vw;top:13vh;animation-delay:-2s!important}
-.c3{left:3.4vw;top:56vh;animation-delay:-4s!important}
-.c4{right:3.2vw;top:52vh;animation-delay:-5.5s!important}
+.c3{left:3.4vw;top:43vh;animation-delay:-4s!important}
+.c4{right:3.2vw;top:41vh;animation-delay:-5.5s!important}
 .c2 .puff,.c4 .puff{left:auto;right:12%}
 .c2::before,.c4::before{left:auto;right:12%}
 .c2::after,.c4::after{right:auto;left:16%}
@@ -391,7 +414,7 @@ dialog.guide::backdrop{background:rgba(30,20,15,.45);-webkit-backdrop-filter:blu
 .cloud.solo p{transition:opacity .45s}
 .cloud.solo p.fade{opacity:0}
 /* wide landscape screens: 4 clouds in the side margins */
-@media (orientation:landscape) and (min-width:1180px) and (min-height:600px){ .cloud.side{display:block} }
+@media (orientation:landscape) and (min-width:1320px) and (min-height:600px), (orientation:landscape) and (min-width:1180px) and (min-height:600px) and (max-height:780px){ .cloud.side{display:block} }
 /* tall portrait screens: one cloud that cycles through the slogans */
 @media (orientation:portrait) and (min-height:760px){ .cloud.solo{display:block} }
 @media (prefers-reduced-motion:reduce){
@@ -458,7 +481,10 @@ dialog.guide::backdrop{background:rgba(30,20,15,.45);-webkit-backdrop-filter:blu
       <p>Ba mẹ ơi, dành <strong>10 phút mỗi ngày</strong> ngồi cạnh con cùng học nhé. App chỉ là công cụ, <strong>sự đồng hành của ba mẹ</strong> mới giúp con tự tin và lớn lên mỗi ngày.</p>
     </div>
   </section>
-  <button class="install-btn" type="button" id="openGuide" aria-haspopup="dialog"><span class="ic" aria-hidden="true">📲</span>Đưa App ra màn hình điện thoại</button>
+  <div class="actions">
+    <button class="install-btn" type="button" id="openGuide" aria-haspopup="dialog"><span class="ic" aria-hidden="true">📲</span>Đưa App ra màn hình điện thoại</button>
+    <a class="fb-btn" href="https://www.facebook.com/profile.php?id=61596719128095" target="_blank" rel="noopener" aria-label="Fanpage Bamedonghanh trên Facebook: theo dõi và góp ý"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#1877F2"/><path fill="#fff" d="M13.4 19.5v-6.1h2.1l.3-2.4h-2.4V9.5c0-.7.2-1.2 1.2-1.2h1.3V6.1c-.2 0-1-.1-1.9-.1-1.9 0-3.2 1.2-3.2 3.3V11H8.7v2.4h2.1v6.1h2.6z"/></svg><span class="lbl">Fanpage</span></a>
+  </div>
 </main>
 
 <dialog class="guide" id="guide" aria-labelledby="guideTitle">
@@ -501,6 +527,7 @@ dialog.guide::backdrop{background:rgba(30,20,15,.45);-webkit-backdrop-filter:blu
       </ol>
       <p class="note">💡 Nên dùng <b>Safari</b>. Nếu không thấy mục “Thêm vào MH chính”, kéo xuống cuối danh sách, bấm <b>“Sửa tác vụ”</b> để bật mục này.</p>
     </section>
+    <a class="fb-note" href="https://www.facebook.com/profile.php?id=61596719128095" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#1877F2"/><path fill="#fff" d="M13.4 19.5v-6.1h2.1l.3-2.4h-2.4V9.5c0-.7.2-1.2 1.2-1.2h1.3V6.1c-.2 0-1-.1-1.9-.1-1.9 0-3.2 1.2-3.2 3.3V11H8.7v2.4h2.1v6.1h2.6z"/></svg><span><b>Góp ý cho App?</b> Ba mẹ nhắn tin hoặc bình luận trên <b>Fanpage Bamedonghanh</b>, team đọc hết và hoàn thiện từng ngày 💛</span></a>
     <p class="note" style="background:rgba(232,81,122,.10)">💛 Làm lần lượt cho cả 4 App. Từ lần sau, con chỉ cần chạm vào biểu tượng là học được ngay, như một App thật. Tiến độ học của con vẫn được giữ nguyên.</p>
   </div>
 </dialog>
@@ -558,6 +585,7 @@ dialog.guide::backdrop{background:rgba(30,20,15,.45);-webkit-backdrop-filter:blu
       <p class="note" style="background:rgba(242,140,40,.12)">💾 Dữ liệu chỉ lưu trên máy của gia đình. Ba mẹ nên vào <b>Quản lý tài khoản → Tải file sao lưu</b> định kỳ, và dùng file này khi chuyển sang máy khác.</p>
       <a class="howto-pdf" href="https://mhtiny3ds-a11y.github.io/senapp/public/trang-chu/" target="_blank" rel="noopener">🌸 Xem trang giới thiệu Senapp</a>
     </section>
+    <a class="fb-note" href="https://www.facebook.com/profile.php?id=61596719128095" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#1877F2"/><path fill="#fff" d="M13.4 19.5v-6.1h2.1l.3-2.4h-2.4V9.5c0-.7.2-1.2 1.2-1.2h1.3V6.1c-.2 0-1-.1-1.9-.1-1.9 0-3.2 1.2-3.2 3.3V11H8.7v2.4h2.1v6.1h2.6z"/></svg><span><b>Góp ý cho App?</b> Ba mẹ nhắn tin hoặc bình luận trên <b>Fanpage Bamedonghanh</b>, team đọc hết và hoàn thiện từng ngày 💛</span></a>
   </div>
 </dialog>
 

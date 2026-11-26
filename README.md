@@ -42,6 +42,13 @@ Trên trang giới thiệu: mỗi ô App có nhãn **🐾 Thú cưng**, và bả
 - Màn hình nhỏ hoặc thấp: ẩn để trang vẫn gọn trong 1 màn hình.
 - Sửa câu slogan: 4 câu trong khối `<div class="clouds">` và danh sách `SLOGANS` trong phần `<script>` của `index.html`.
 
+## Fanpage
+
+Fanpage: https://www.facebook.com/profile.php?id=61596719128095
+- Nút **Fanpage** nằm cạnh nút "Đưa App ra màn hình điện thoại" (màn hình hẹp chỉ hiện biểu tượng Facebook).
+- Cuối bảng "Đưa App ra màn hình" và bảng "Hướng dẫn sử dụng" của từng App có dòng mời góp ý trên Fanpage.
+- Khi fanpage có tên rút gọn (ví dụ facebook.com/bamedonghanh), thay link ở 3 chỗ trong `index.html` (tìm `profile.php?id=`).
+
 ## Sửa nội dung
 
 - Đổi link app: sửa thuộc tính `href` của 4 thẻ `<a class="app ...">` trong `index.html`.
